@@ -69,10 +69,14 @@ title('SAM8-Sin Function')
 sam9 = rand_a(1000); 
 % observation xn 1000
 figure(13); histfit(sam9)
+xlabel('Xn')
+ylabel('N')
 title('Fit of the Histogram Distribution for n=1000')
 
 sam10 = rand_a2(10000);
 figure(14); histfit(sam10)
+xlabel('Xn')
+ylabel('N')
 title('Fit of the Histogram Distribution for n=10000')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,6 +85,8 @@ title('Fit of the Histogram Distribution for n=10000')
 
 sam11=uniform(1000);
 figure(15); histfit(sam11)
+xlabel('Xu')
+ylabel('U')
 title('Fit of the Uniform Distribution for n=1000')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,10 +95,14 @@ title('Fit of the Uniform Distribution for n=1000')
 
 sam12=cogaussian();
 figure(16); plot(sam12)
+xlabel('Samples') 
+ylabel('Co-Relation Coefficient')
 title('Autocorelation of Gausain Noise')
 
 sam13=couniform();
 figure(17); plot(sam13)
+xlabel('Samples') 
+ylabel('Co-Relation Coefficient')
 title('Autocorelation of Uniform Noise')
 % Conclusion : The gaussian noise is the white noise as you can see from the graph that it is not dependent 
 % on the frequency and the energy level is the same whereas in the case of uniform noise , it's dependent on
@@ -102,15 +112,22 @@ title('Autocorelation of Uniform Noise')
 % 2.4
 [sam14,sam15,sam16,sam17]=binary();
 figure(18); plot(sam14);
+xlabel('sam')
 title('Plot of the Signal S=s1+s2+s3')
 
 figure(19); plot(sam15);
+xlabel('Samples') 
+ylabel('Co-Relation Coefficient')
 title('Corelation of the S & S1')
 
 figure(20); plot(sam16);
+xlabel('Samples') 
+ylabel('Co-Relation Coefficient')
 title('Corelation of the S & S2')
 
 figure(21); plot(sam17);
+xlabel('Samples') 
+ylabel('Co-Relation Coefficient')
 title('Corelation of the S & S3')
 
 
@@ -319,14 +336,14 @@ a=zeros(300,1);
     end
     
     for i=1:50
-        a(i+100)=s2(i);
+        a(i+150)=s2(i);
     end
     for i=51 :300
         s2(i)=0;
     end
     
     for i=1:50
-        a(i+200)=s3(i);
+        a(i+250)=s3(i);
     end
     for i=51 :300
         s3(i)=0;
@@ -334,15 +351,16 @@ a=zeros(300,1);
  
 sam14=a;
 
-length(sam14)
-length(s1)
 % Compute the cross-correlation
 % between the whole signals and s1; s2; s3. Comments the results.
-sam15=corrcoef(sam14,s1); 
-sam16=corrcoef(sam14,s2);
-sam17=corrcoef(sam14,s3);
+sam15=xcorr(sam14,s1); 
+sam16=xcorr(sam14,s2);
+sam17=xcorr(sam14,s3);
 
-% EXPLAIN??
+% EXPLAIN
+% If I corelate with s1, I will see the peak at Signal 1 which shows that the sam14 contains the maximum part of S1. 
+% When I corelate with S2,It will have a peak at second peak so it shows that sam14 signal which is the sum of all three signals 
+% conains the maximum information about s2.
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
